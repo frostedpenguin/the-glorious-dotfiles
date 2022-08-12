@@ -1,11 +1,11 @@
 local awful = require('awful')
-local beautiful = require('beautiful')
-local wibox = require('wibox')
+local beautiful = require('beautiful') local wibox = require('wibox')
 local gears = require('gears')
 local debug = require('gears.debug')
 local icons = require('theme.icons')
 local dpi = beautiful.xresources.apply_dpi
 local clickable_container = require('widget.clickable-container')
+local debug = require('debug.init') 
 local task_list = require('widget.task-list')
 
 local top_panel = function(s, offset)
