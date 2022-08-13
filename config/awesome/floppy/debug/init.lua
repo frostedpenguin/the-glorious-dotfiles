@@ -1,12 +1,20 @@
-local Error = require('debug.types.Errors')
-local warning = require('debug.types.Warning')
-local info =  require('debug.types.Info')
-local ruled = require('ruled')
+local error_notification = require("debug.notifications.Error")
+local warning_notification = require("debug.notifications.Warning")
+local info_notification = require("debug.notifications.Info")
+local signals = require("debug.types.signals")
+-- local ruled = require("ruled")
+require("debug.presets")
 
-ruled.notification.emit_signal('request::rules')
+-- ruled.notification.emit_signal("request::rules")
 
-awesome.connect_signal('debug::error', function(message) Error(message) end)
+awesome.connect_signal(signals.ERROR, function(message)
+	error_notification(message)
+end)
 
-awesome.connect_signal('debug::warning', function (message) warning(message) end)
+awesome.connect_signal(signals.WARNING, function(message)
+	warning_notification(message)
+end)
 
-awesome.connect_signal('debug::info', function (message) info(message) end)
+awesome.connect_signal(signals.INFO, function(message)
+	info_notification(message)
+end)

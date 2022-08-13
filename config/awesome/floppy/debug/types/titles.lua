@@ -1,6 +1,6 @@
-EdebugTitles = { 
-  INFO = "info",
-  WARNING = "warning",
-  ERROR = "error",
+EdebugTitles = {
+	INFO = "info",
+	WARNING = "warning",
+	ERROR = "error",
 }
 return EdebugTitles
