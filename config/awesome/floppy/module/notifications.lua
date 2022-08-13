@@ -46,10 +46,11 @@ ruled.notification.connect_signal(
 			rule       = { urgency = 'critical' },
 			properties = { 
 				font        		= 'Inter Bold 10',
-				bg 					= '#ff0000', 
-				fg 					= '#ffffff',
+				bg 					= 'red', 
+				fg 					= 'white',
 				margin 				= dpi(16),
 				position 			= 'top_right',
+			  icon = beautiful.awesome_icon,
 				implicit_timeout	= 0
 			}
 		}
@@ -59,10 +60,11 @@ ruled.notification.connect_signal(
 			rule       = { urgency = 'normal' },
 			properties = {
 				font        		= 'Inter Regular 10',
-				bg      			= beautiful.transparent, 
-				fg 					= beautiful.fg_normal,
+				bg      			= '#e2eb34',
+				fg 					= 'white',
 				margin 				= dpi(16),
 				position 			= 'top_right',
+        icon = beautiful.awesome_icon,
 				implicit_timeout 	= 5
 			}
 		}
@@ -86,14 +88,8 @@ ruled.notification.connect_signal(
 naughty.connect_signal(
 	'request::display_error',
 	function(message, startup)
-		naughty.notification {
-			urgency = 'critical',
-			title   = 'Oops, an error happened'..(startup and ' during startup!' or '!'),
-			message = message,
-			app_name = 'System Notification',
-			icon = beautiful.awesome_icon
-		}
-	end
+    return nil
+			end
 )
 
 -- XDG icon lookup
