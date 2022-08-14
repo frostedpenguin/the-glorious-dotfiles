@@ -1,4 +1,5 @@
 local wibox = require("wibox")
+local file_reader = require("widget.network-manager.controller")
 local clickable_container = require("widget.clickable-container")
 local awful = require("awful")
 local gears = require("gears")
@@ -29,6 +30,6 @@ local widget_button = wibox.widget({
 	widget = clickable_container,
 })
 widget_button:buttons(gears.table.join(awful.button({}, 1, nil, function()
-	awesome.emit_signal("debug::warning", "File not found:")
+	file_reader()
 end)))
 return widget_button

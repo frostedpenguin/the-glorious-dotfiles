@@ -6,7 +6,6 @@ local debug = require("gears.debug")
 local icons = require("theme.icons")
 local dpi = beautiful.xresources.apply_dpi
 local clickable_container = require("widget.clickable-container")
-local debug = require("module.debug.init")
 local task_list = require("widget.task-list")
 
 local top_panel = function(s, offset)
