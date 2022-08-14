@@ -1,9 +1,9 @@
-local error_notification = require("debug.notifications.Error")
-local warning_notification = require("debug.notifications.Warning")
-local info_notification = require("debug.notifications.Info")
-local signals = require("debug.types.signals")
+local error_notification = require("module.debug.notifications.Error")
+local warning_notification = require("module.debug.notifications.Warning")
+local info_notification = require("module.debug.notifications.Info")
+local signals = require("module.debug.types.signals")
 -- local ruled = require("ruled")
-require("debug.presets")
+require("module.debug.presets")
 
 -- ruled.notification.emit_signal("request::rules")
 

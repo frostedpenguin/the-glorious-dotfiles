@@ -1,6 +1,6 @@
 local naughty = require("naughty")
-local warning_title = require("debug.types.titles").WARNING
-local warning_urgency = require("debug.types.urgency").WARNING
+local warning_title = require("module.debug.types.titles").WARNING
+local warning_urgency = require("module.debug.types.urgency").WARNING
 function throw_warning(message)
 	naughty.notify({
 		preset = naughty.config.presets.normal,
