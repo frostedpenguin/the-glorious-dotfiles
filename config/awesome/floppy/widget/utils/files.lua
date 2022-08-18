@@ -1,7 +1,6 @@
 local awful = require("awful")
 local debug_signals = require("module.debug.types.signals")
 local naughty = require("naughty")
-local co = coroutine
 -- naughty.notify(io.popen("ls").__gc)
 function file_exists(file)
 	local f = io.open(file, "r")
@@ -25,5 +24,8 @@ function lines_from(file)
 	awesome.emit_signal(debug_signals.INFO, "lines from file:" .. file .. ":" .. lines[1])
 	return lines
 end
+local file_reader_thread = coroutine.create(function(file)
+	coroutine.yield(lines_from(file))
+end)
 
-return lines_from
+return file_reader_thread

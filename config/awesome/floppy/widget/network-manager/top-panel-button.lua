@@ -32,7 +32,5 @@ local widget_button = wibox.widget({
 })
 widget_button:buttons(gears.table.join(awful.button({}, 1, nil, function()
 	file_reader()
-	local current_dir = os.getenv("PWD")
-	print(current_dir)
 end)))
 return widget_button
