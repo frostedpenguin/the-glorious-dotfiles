@@ -3,6 +3,7 @@ local file_reader = require("widget.network-manager.controller")
 local clickable_container = require("widget.clickable-container")
 local awful = require("awful")
 local gears = require("gears")
+local naughty = require("naughty")
 local config_dir = gears.filesystem.get_configuration_dir()
 local widget_icon_dir = config_dir .. "widget/network/icons/"
 local dpi = require("beautiful").xresources.apply_dpi
@@ -31,5 +32,7 @@ local widget_button = wibox.widget({
 })
 widget_button:buttons(gears.table.join(awful.button({}, 1, nil, function()
 	file_reader()
+	local current_dir = os.getenv("PWD")
+	print(current_dir)
 end)))
 return widget_button

@@ -5,8 +5,8 @@ local debug_signals = require("module.debug.types.signals")
 
 local list_networks = function()
 	local networks = {}
-	local buffer = file_reader("/scripts/list-networks.sh")
-	awesome.emit_signal(debug_signals.INFO, buffer)
+	local buffer = file_reader("./widget/network-manager/scripts/list-networks.sh")
+	-- awesome.emit_signal(debug_signals.INFO, buffer)
 	return networks
 end
 return list_networks

@@ -7,7 +7,7 @@ local icons = require("theme.icons")
 local dpi = beautiful.xresources.apply_dpi
 local clickable_container = require("widget.clickable-container")
 local task_list = require("widget.task-list")
-
+local naughty = require("naughty")
 local top_panel = function(s, offset)
 	local offsetx = 0
 	if offset == true then
