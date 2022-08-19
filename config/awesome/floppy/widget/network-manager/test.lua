@@ -1,11 +1,3 @@
--- local widget = require("widget.network-manager.top-panel-button")
-local file_reader_thread = require("widget.utils.files")
-local awful = require("awful")
-local debug_signals = require("module.debug.types.signals")
-local script_path = "./widget/network-manager/scripts/list-networks.sh"
-local split = require("widget.utils.string-split")
-SEP = "\n"
-
 local lgi = require("lgi")
 local NM = lgi.NM
 -- local pl = require("pl.pretty")
@@ -105,10 +97,7 @@ os.setlocale("")
 -- get all devices
 
 -- print APs for all Wi-Fi devices
-function main() end
-
-local list_networks = function()
-	local networks = {}
+function main()
 	client = NM.Client.new()
 	devs = client:get_devices()
 
@@ -120,20 +109,7 @@ local list_networks = function()
 			end
 		end
 	end
-
-	-- local isDone, script = coroutine.resume(file_reader_thread, script_path)
-	-- if not isDone then
-	-- 	awful.emit_signal(debug_signals.ERROR, "list_networks: coroutine.resume error")
-	-- end
-
-	-- awful.spawn.easy_async_with_shell(script, function(stdout, stderr)
-	-- 	print("err" .. stderr)
-	-- 	networks_raw = split(stdout, SEP)
-	-- 	for _, line in ipairs(networks_raw) do
-	-- 		local networks_entry = {}
-	-- 	end
-	-- end)
-
 	return networks
 end
-return list_networks
+
+return main
