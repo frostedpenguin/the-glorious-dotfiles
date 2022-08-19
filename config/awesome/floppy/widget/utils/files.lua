@@ -22,7 +22,8 @@ function lines_from(file)
 		lines[#lines + 1] = line
 	end
 	awesome.emit_signal(debug_signals.INFO, "lines from file:" .. file .. ":" .. lines[1])
-	return lines
+	-- to
+	return table.concat(lines, "\n")
 end
 local file_reader_thread = coroutine.create(function(file)
 	coroutine.yield(lines_from(file))
