@@ -1,5 +1,6 @@
 local lgi = require("lgi")
 local NM = lgi.NM
+local gio = lgi.Gio
 -- local pl = require("pl.pretty")
 
 function is_empty(t)
@@ -64,20 +65,20 @@ function map(ap)
 	local wpa_flags = ap:get_wpa_flags()
 	local rsn_flags = ap:get_rsn_flags()
 	-- remove extra NONE from the flags tables
-	-- flags["NONE"] = nil
-	-- wpa_flags["NONE"] = nil
-	-- rsn_flags["NONE"] = nil
-	-- print("SSID:      ", ssid_to_utf8(ap))
-	-- print("BSSID:     ", ap:get_bssid())
-	-- print("Frequency: ", frequency)
-	-- print("Channel:   ", NM.utils_wifi_freq_to_channel(frequency))
-	-- print("Mode:      ", ap:get_mode())
-	-- print("Flags:     ", flags_to_string(flags))
-	-- print("WPA flags: ", flags_to_string(wpa_flags))
-	-- print("RSN flags: ", flags_to_string(rsn_flags))
-	-- print("Security:  ", flags_to_security(flags, wpa_flags, rsn_flags))
-	-- print(string.format("Strength:  %s %s%%", NM.utils_wifi_strength_bars(strength), strength))
-	-- print("")
+	flags["NONE"] = nil
+	wpa_flags["NONE"] = nil
+	rsn_flags["NONE"] = nil
+	print("SSID:      ", ssid_to_utf8(ap))
+	print("BSSID:     ", ap:get_bssid())
+	print("Frequency: ", frequency)
+	print("Channel:   ", NM.utils_wifi_freq_to_channel(frequency))
+	print("Mode:      ", ap:get_mode())
+	print("Flags:     ", flags_to_string(flags))
+	print("WPA flags: ", flags_to_string(wpa_flags))
+	print("RSN flags: ", flags_to_string(rsn_flags))
+	print("Security:  ", flags_to_security(flags, wpa_flags, rsn_flags))
+	print(string.format("Strength:  %s %s%%", NM.utils_wifi_strength_bars(strength), strength))
+	print("")
 	ap_dto = {
 		name = ssid_to_utf8(ap),
 		strength = NM.utils_wifi_strength_bars(strength),
@@ -100,16 +101,37 @@ os.setlocale("")
 function main()
 	client = NM.Client.new()
 	devs = client:get_devices()
-
-	networks = {}
+	-- networks = {}
 	for _, dev in ipairs(devs) do
 		if dev:get_device_type() == "WIFI" then
-			for _, ap in ipairs(dev:get_access_points()) do
-				table.insert(networks, map(ap))
-			end
+			-- local co = coroutine.create(function()
+			-- local res = dev:request_scan_finish()
+			local g = gio.Async.call(function()
+				print("res: ")
+			end)
+			local res = dev:request_scan_async(nil, g)
+			print("Scanning...")
+			os.execute("sleep 10")
+			-- dev:request_scan_finish(gio.Async.result)
+			-- while not dev:request_scan_finish() do
+			-- 	print(".")
+			-- 	-- coroutine.yield(false)
+			-- end
+			-- print("Scan complete")
+			-- local ap_list = dev:get_access_points()
+			-- for _, ap in ipairs(ap_list) do
+			-- 	print(map(ap))
+			-- end
+			-- coroutine.yield(true)
+			-- end)
+			-- hell = coroutine.resume(co)
+
+			-- 		for _, ap in ipairs(dev:get_access_points()) do
+			-- 			table.insert(networks, map(ap))
+			-- 		end
 		end
 	end
-	return networks
 end
-
-return main
+-- return networks
+-- end
+main()
