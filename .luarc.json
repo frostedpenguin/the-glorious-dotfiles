@@ -8,6 +8,8 @@
         "lvim",
         "packer_plugins",
         "wibox",
-        "awesome"
+        "awesome",
+        "Network",
+        "NetworkRepository"
     ]
 }
