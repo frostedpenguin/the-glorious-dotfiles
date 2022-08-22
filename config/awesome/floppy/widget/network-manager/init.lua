@@ -3,7 +3,6 @@ local naughty = require("naughty")
 
 local config = require("configuration.config")
 local widget_button = require("widget.network-manager.top-panel-button")
-local controller = require("widget.network-manager.controller")
 
 -- Configuration
 local interfaces = {

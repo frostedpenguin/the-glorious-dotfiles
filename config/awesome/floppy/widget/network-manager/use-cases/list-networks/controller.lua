@@ -1,14 +1,15 @@
--- local widget = require("widget.network-manager.top-panel-button")
-local file_reader_thread = require("widget.utils.files")
 local awful = require("awful")
-local debug_signals = require("module.debug.types.signals")
-local script_path = "./widget/network-manager/scripts/list-networks.sh"
-local split = require("widget.utils.string-split")
+-- local debug_signals = require("module.debug.types.signals")
 SEP = "\n"
 
 local lgi = require("lgi")
 local NM = lgi.NM
 -- local pl = require("pl.pretty")
+
+function scan()
+	local rescan_command = "nmcli device wifi rescan"
+	os.execute(rescan_command)
+end
 
 function is_empty(t)
 	local next = next
@@ -72,20 +73,6 @@ function map(ap)
 	local wpa_flags = ap:get_wpa_flags()
 	local rsn_flags = ap:get_rsn_flags()
 	-- remove extra NONE from the flags tables
-	-- flags["NONE"] = nil
-	-- wpa_flags["NONE"] = nil
-	-- rsn_flags["NONE"] = nil
-	-- print("SSID:      ", ssid_to_utf8(ap))
-	-- print("BSSID:     ", ap:get_bssid())
-	-- print("Frequency: ", frequency)
-	-- print("Channel:   ", NM.utils_wifi_freq_to_channel(frequency))
-	-- print("Mode:      ", ap:get_mode())
-	-- print("Flags:     ", flags_to_string(flags))
-	-- print("WPA flags: ", flags_to_string(wpa_flags))
-	-- print("RSN flags: ", flags_to_string(rsn_flags))
-	-- print("Security:  ", flags_to_security(flags, wpa_flags, rsn_flags))
-	-- print(string.format("Strength:  %s %s%%", NM.utils_wifi_strength_bars(strength), strength))
-	-- print("")
 	ap_dto = {
 		name = ssid_to_utf8(ap),
 		strength = NM.utils_wifi_strength_bars(strength),
@@ -108,6 +95,7 @@ os.setlocale("")
 function main() end
 
 local list_networks = function()
+	scan()
 	local networks = {}
 	client = NM.Client.new()
 	devs = client:get_devices()
