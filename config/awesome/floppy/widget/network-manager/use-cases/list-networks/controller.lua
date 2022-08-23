@@ -1,15 +1,8 @@
 local awful = require("awful")
+local use_case_errors = require("widget.network-manager.use-cases.list-networks.errors")
 -- local debug_signals = require("module.debug.types.signals")
-SEP = "\n"
-
 local lgi = require("lgi")
 local NM = lgi.NM
--- local pl = require("pl.pretty")
-
-function scan()
-	local rescan_command = "nmcli device wifi rescan"
-	os.execute(rescan_command)
-end
 
 function is_empty(t)
 	local next = next
@@ -81,47 +74,47 @@ function map(ap)
 	return ap_dto
 end
 
----------------------------
--- Main code starts here --
----------------------------
 -- Call setlocale() else NM.utils_wifi_strength_bars() will think the locale
 -- is ASCII-only, and return the fallback characters rather than the unicode bars
 
 os.setlocale("")
 
--- get all devices
-
--- print APs for all Wi-Fi devices
-function main() end
-
 local list_networks = function()
-	scan()
-	local networks = {}
 	client = NM.Client.new()
-	devs = client:get_devices()
-
-	networks = {}
+	local devs = client:get_devices()
+	local available_networks = {}
+	local wifi_devices = {}
 	for _, dev in ipairs(devs) do
 		if dev:get_device_type() == "WIFI" then
-			for _, ap in ipairs(dev:get_access_points()) do
-				table.insert(networks, map(ap))
-			end
+			table.insert(wifi_devices, dev)
 		end
 	end
+	if #wifi_devices == 0 then
+		return use_case_errors.DeviceError
+	end
+	for _, dev in ipairs(wifi_devices) do
+		for _, ap in ipairs(dev:get_access_points()) do
+			local net_dto = map(ap)
+			print(net_dto.name)
+			table.insert(available_networks, net_dto)
+		end
+	end
+	if #available_networks == 0 then
+		return use_case_errors.NoNetworkError
+	end
+	return available_networks
+end
 
-	-- local isDone, script = coroutine.resume(file_reader_thread, script_path)
-	-- if not isDone then
-	-- 	awful.emit_signal(debug_signals.ERROR, "list_networks: coroutine.resume error")
-	-- end
-
-	-- awful.spawn.easy_async_with_shell(script, function(stdout, stderr)
-	-- 	print("err" .. stderr)
-	-- 	networks_raw = split(stdout, SEP)
-	-- 	for _, line in ipairs(networks_raw) do
-	-- 		local networks_entry = {}
-	-- 	end
-	-- end)
-
+function main()
+	local rescan_command = "nmcli device wifi list"
+	local networks = {}
+	awful.spawn.easy_async_with_shell(rescan_command, function(stdout, stderr)
+		if stderr ~= "" then
+			return use_case_errors.ScanError
+		end
+		networks = list_networks()
+	end)
 	return networks
 end
-return list_networks
+
+return main

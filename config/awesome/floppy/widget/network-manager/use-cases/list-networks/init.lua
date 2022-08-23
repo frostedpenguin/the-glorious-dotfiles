@@ -9,9 +9,14 @@ awesome.connect_signal(signals.LIST_NETWORKS, function()
 end)
 
 function execute()
-	local available_networks = use_case_controller()
+	local networks_or_error = use_case_controller()
+	-- print("networks_or_error", networks_or_error[1].get_ssid())
+	if getmetatable(networks_or_error) == Error then
+		awesome.emit_signal(networks_or_error.get_signal(), networks_or_error.get_message())
+		return
+	end
 	local repo = network_repo:new()
-	for _, net in ipairs(available_networks) do
+	for _, net in ipairs(networks_or_error) do
 		local curr_network = network:new(net.name, net.strength, net.security)
 		awesome.emit_signal(debug_signals.INFO, net.name)
 		repo:add_network(curr_network)
