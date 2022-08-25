@@ -1,11 +1,12 @@
-Network = { ssid = "", signal = "", security = "" }
-function Network:new(ssid, signal, security)
+Network = { ssid = "", signal = "", security = "", device_name = "" }
+function Network:new(ssid, signal, security, device_name)
 	o = o or {}
 	setmetatable(o, self)
 	self.__index = self
 	self.SSID = ssid
 	self.signal = signal
 	self.security = security
+	self.device_name = device_name
 	return o
 end
 function Network:get_ssid()

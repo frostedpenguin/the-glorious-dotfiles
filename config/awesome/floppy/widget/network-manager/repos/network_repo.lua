@@ -1,4 +1,10 @@
+local lgi = require("lgi")
+local NM = lgi.NM
+os.setlocale("")
+client = NM.Client.new()
+
 NetworkRepository = {}
+
 function NetworkRepository:new()
 	o = o or {}
 	setmetatable(o, self)
@@ -8,7 +14,34 @@ end
 function NetworkRepository:get_networks()
 	return self.networks
 end
+
 function NetworkRepository:add_network(network)
-	self.networks[#self.networks + 1] = network
+	table.insert(self.networks, network)
+end
+
+function NetworkRepository:scan()
+	local rescan_command = "nmcli device wifi list"
+	local is_success, err = os.execute(rescan_command)
+	return is_success
+end
+
+function NetworkRepository:get_wifi_devices()
+	local devs = client:get_devices()
+	local wifi_devs = {}
+	for _, dev in ipairs(devs) do
+		if dev:get_device_type() == "WIFI" and dev:get_state() == "ACTIVATED" then
+			table.insert(wifi_devs, dev)
+		end
+	end
+	return wifi_devs
+end
+
+function getAccessPointsForDevice(dev)
+	local aps = {}
+	local ap_list = dev:get_access_points()
+	for _, ap in ipairs(ap_list) do
+		table.insert(aps, ap)
+	end
+	return aps
 end
 return NetworkRepository
