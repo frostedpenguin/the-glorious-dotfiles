@@ -1,14 +1,14 @@
 local lgi = require("lgi")
 local NM = lgi.NM
 os.setlocale("")
-client = NM.Client.new()
 
-NetworkRepository = {}
+NetworkRepository = { networks = {} }
 
-function NetworkRepository:new()
+function NetworkRepository:new(o)
 	o = o or {}
 	setmetatable(o, self)
 	self.__index = self
+	self.networks = {}
 	return o
 end
 function NetworkRepository:get_networks()
@@ -26,6 +26,7 @@ function NetworkRepository:scan()
 end
 
 function NetworkRepository:get_wifi_devices()
+	client = NM.Client.new()
 	local devs = client:get_devices()
 	local wifi_devs = {}
 	for _, dev in ipairs(devs) do
@@ -33,6 +34,7 @@ function NetworkRepository:get_wifi_devices()
 			table.insert(wifi_devs, dev)
 		end
 	end
+	print(#wifi_devs)
 	return wifi_devs
 end
 

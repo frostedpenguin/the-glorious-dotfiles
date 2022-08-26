@@ -1,7 +1,9 @@
 local Error = require("widget.shared.Error")
 use_case_errors = {
-	ScanError = Error:new("Unexpected ScanError"),
-	DeviceError = Error:new("Not available wifi devices!"),
-	NoNetworkError = Error:new("No networks found!"),
+	scan_error = Error:new(nil, "Unexpected ScanError"),
+	device_error = Error:new(nil, "Not available wifi devices!"),
+	no_network_error = Error:new(nil, "No networks found!"),
 }
+local err = Error:new(nil, "Unexpected ScanError")
+print(err)
 return use_case_errors
