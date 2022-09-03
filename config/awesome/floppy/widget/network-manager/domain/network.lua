@@ -1,6 +1,6 @@
-Network = { ssid = "", signal = "", security = "", device_name = "" }
+local Network = { ssid = "", signal = "", security = "", device_name = "" }
 function Network:new(ssid, signal, security, device_name)
-	o = o or {}
+	local o = o or {}
 	setmetatable(o, self)
 	self.__index = self
 	self.SSID = ssid
