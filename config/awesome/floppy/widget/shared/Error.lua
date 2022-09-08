@@ -1,11 +1,14 @@
 local debug_signals = require("module.debug.types.signals")
-Error = { message = "" }
+---@class Error
+---@field message string
+local Error = { message = "" }
+---@param message string
+---@return Error
 function Error:new(o, message)
 	o = o or {}
 	setmetatable(o, self)
 	self.__index = self
 	self.message = message or ""
-	print(self.message)
 	return o
 end
 function Error:__tostring()

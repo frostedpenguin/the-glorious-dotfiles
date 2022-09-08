@@ -2,7 +2,7 @@ local lgi = require("lgi")
 local NM = lgi.NM
 os.setlocale("")
 
-NetworkRepository = { networks = {} }
+local NetworkRepository = { networks = {} }
 
 function NetworkRepository:new(o)
 	o = o or {}
@@ -38,7 +38,7 @@ function NetworkRepository:get_wifi_devices()
 	return wifi_devs
 end
 
-function getAccessPointsForDevice(dev)
+local getAccessPointsForDevice = function(dev)
 	local aps = {}
 	local ap_list = dev:get_access_points()
 	for _, ap in ipairs(ap_list) do
