@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
     "Lua.diagnostics.disable": [
         "lowercase-global",
@@ -14,3 +15,20 @@
         "NetworkRepository"
     ]
 }
+=======
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "Lua.diagnostics.disable": [
+    "lowercase-global"
+  ],
+  "Lua.diagnostics.enable": true,
+  "Lua.diagnostics.globals": [
+    "vim",
+    "lvim",
+    "packer_plugins",
+    "wibox",
+    "awesome",
+    "Network",
+    "NetworkRepository"
+  ]
+}
+>>>>>>> 57ca39b (regular commit)

@@ -68,7 +68,7 @@ local execute = function(repo)
 	local is_success = repo:scan()
 	print("is_success", is_success)
 	if not is_success then
-		return use_case_errors.scan_error
+		return use_case_errors.device_error
 	end
 	local wifi_devices = repo:get_wifi_devices()
 	if #wifi_devices == 0 then
