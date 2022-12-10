@@ -10,9 +10,9 @@ return {
 		-- Default web browser
 		web_browser = "firefox",
 		-- Default text editor
-		text_editor = "subl3",
+		text_editor = "subl",
 		-- Default file manager
-		file_manager = "dolphin",
+		file_manager = "thunar",
 		-- Default media player
 		multimedia = "vlc",
 		-- Default game, can be a launcher like steam
@@ -20,11 +20,11 @@ return {
 		-- Default graphics editor
 		graphics = "gimp-2.10",
 		-- Default sandbox
-		sandbox = "virtualbox",
+		sandbox = "virt-manager",
 		-- Default IDE
 		development = "",
 		-- Default network manager
-		network_manager = "kitty iwctl",
+		network_manager = "nm-connection-editor",
 		-- Default bluetooth manager
 		bluetooth_manager = "blueman-manager",
 		-- Default power manager
@@ -34,7 +34,7 @@ return {
 		-- Default locker
 		lock = "awesome-client \"awesome.emit_signal('module::lockscreen_show')\"",
 		-- Default quake terminal
-		quake = "kitty --name QuakeTerminal",
+		-- quake = "kitty --name QuakeTerminal",
 		-- Default rofi global menu
 		rofi_global = "rofi -dpi "
 			.. screen.primary.dpi
@@ -57,7 +57,8 @@ return {
 	-- List of apps to start once on start-up
 	run_on_start_up = {
 		-- Compositor
-		"picom -b --experimental-backends --dbus --config "
+	--	"picom -b --experimental-backends --dbus --config "
+		"picom --dbus --config"
 			.. config_dir
 			.. "/configuration/picom.conf",
 		-- Blueman applet
@@ -69,7 +70,7 @@ return {
 		-- Load X colors
 		"xrdb $HOME/.Xresources",
 		-- Audio equalizer
-		"pulseeffects --gapplication-service",
+		-- "pulseeffects --gapplication-service",
 		-- Lockscreen timer
 		[[
 		xidlehook --not-when-fullscreen --not-when-audio --timer 600 \
