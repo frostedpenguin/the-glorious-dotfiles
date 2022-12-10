@@ -36,7 +36,7 @@ return {
 
 		screen_recorder = {
 			-- Default record dimension
-			resolution = "1366x768",
+			resolution = "1920x1080",
 			-- X,Y coordinate
 			offset = "0,0",
 			-- Enable audio by default
