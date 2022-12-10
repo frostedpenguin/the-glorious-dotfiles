@@ -30,6 +30,7 @@ theme.system_cyan_light = "#87DFEB"
 
 theme.system_white_dark = "#E5E5E5"
 theme.system_white_light = "#F8F8F2"
+theme.tags_focused = "#ffffff" .. "45"
 
 -- Accent color
 theme.accent = theme.system_blue_dark
