@@ -5,79 +5,87 @@ local icons = require("theme." .. THEME .. ".icons")
 local apps = require("configuration.apps")
 
 local tags = {
+--	{
+--		type = "terminal",
+--		icon = icons.terminal,
+--		default_app = apps.default.terminal,
+--		gap = beautiful.useless_gap,
+--	}
+--	{
+--		type = "internet",
+--		icon = icons.web_browser,
+--		default_app = apps.default.web_browser,
+--		gap = beautiful.useless_gap,
+--	},
+--	{
+--		type = "code",
+--		icon = icons.text_editor,
+--		default_app = apps.default.text_editor,
+--		gap = beautiful.useless_gap,
+--	},
+--	{
+--		type = "files",
+--		icon = icons.file_manager,
+--		default_app = apps.default.file_manager,
+--		gap = beautiful.useless_gap,
+--		layout = awful.layout.suit.tile,
+--	},
+--	{
+--		type = "multimedia",
+--		icon = icons.multimedia,
+--		default_app = apps.default.multimedia,
+--		gap = beautiful.useless_gap,
+--		layout = awful.layout.suit.floating,
+--	},
+--	{
+--		type = "games",
+--		icon = icons.games,
+--		default_app = apps.default.game,
+--		gap = beautiful.useless_gap,
+--		layout = awful.layout.suit.floating,
+--	},
+--	{
+--		type = "graphics",
+--		icon = icons.graphics,
+--		default_app = apps.default.graphics,
+--		gap = beautiful.useless_gap,
+--	},
+--	{
+--		type = "sandbox",
+--		icon = icons.sandbox,
+--		default_app = apps.default.sandbox,
+--		layout = awful.layout.suit.max,
+--		gap = 0,
+--	},
+--	{
+--		type = "any",
+--		icon = icons.circletags,
+--		default_app = apps.default.development,
+--		gap = beautiful.useless_gap,
+--		layout = awful.layout.suit.floating,
+--	},
+--	{
+--	   type = 'social',
+--	   icon = icons.social,
+--	   default_app = 'discord',
+--	   gap = beautiful.useless_gap
+--	 },
 	{
-		type = "terminal",
-		icon = icons.terminal,
-		default_app = apps.default.terminal,
-		gap = beautiful.useless_gap,
-	},
-	{
-		type = "internet",
-		icon = icons.web_browser,
-		default_app = apps.default.web_browser,
-		gap = beautiful.useless_gap,
-	},
-	{
-		type = "code",
-		icon = icons.text_editor,
-		default_app = apps.default.text_editor,
-		gap = beautiful.useless_gap,
-	},
-	{
-		type = "files",
-		icon = icons.file_manager,
-		default_app = apps.default.file_manager,
-		gap = beautiful.useless_gap,
-		layout = awful.layout.suit.tile,
-	},
-	{
-		type = "multimedia",
-		icon = icons.multimedia,
-		default_app = apps.default.multimedia,
-		gap = beautiful.useless_gap,
+		type = 'general',
+		icon = icons.circletags,
+		default_app = apps.default.general,
 		layout = awful.layout.suit.floating,
+		gap = 1
+--		gap = beautiful.useless_gap,
 	},
-	{
-		type = "games",
-		icon = icons.games,
-		default_app = apps.default.game,
-		gap = beautiful.useless_gap,
-		layout = awful.layout.suit.floating,
-	},
-	{
-		type = "graphics",
-		icon = icons.graphics,
-		default_app = apps.default.graphics,
-		gap = beautiful.useless_gap,
-	},
-	{
-		type = "sandbox",
-		icon = icons.sandbox,
-		default_app = apps.default.sandbox,
-		layout = awful.layout.suit.max,
-		gap = 0,
-	},
-	{
-		type = "any",
-		icon = icons.development,
-		default_app = apps.default.development,
-		gap = beautiful.useless_gap,
-		layout = awful.layout.suit.floating,
-	},
-	-- {
-	--   type = 'social',
-	--   icon = icons.social,
-	--   default_app = 'discord',
-	--   gap = beautiful.useless_gap
-	-- }
 }
 
 -- Set tags layout
 tag.connect_signal("request::default_layouts", function()
 	awful.layout.append_default_layouts({
+		awful.layout.suit.floating,
 		awful.layout.suit.spiral.dwindle,
 		awful.layout.suit.tile,
-		awful.layout.suit.floating,
 		awful.layout.suit.max,
 	})
 end)
