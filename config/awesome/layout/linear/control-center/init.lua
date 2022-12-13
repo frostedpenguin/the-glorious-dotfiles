@@ -219,7 +219,7 @@ local control_center = function(s)
 	})
 
 	panel:connect_signal("property::height", function()
-		awful.placement.bottom_left(panel, {
+		awful.placement.bottom_right(panel, {
 			honor_workarea = true,
 			margins = {
 				bottom = dpi(5),
